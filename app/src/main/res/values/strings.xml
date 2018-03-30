@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SignInSignUpApp</string>
+
+        <!-- Main Activity -->
+    <string name="sign_in">Choose a Sign In Method</string>
+    <string name="sign_up">Sign up for an Account!</string>
+    <string name="register">Register</string>
+
 </resources>

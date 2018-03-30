@@ -3,37 +3,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <EditText
-        android:id="@+id/field_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="vertical">
 
-        android:inputType="textEmailAddress" />
+        <TextView
+            style="@style/main_textview"
+            android:text="@string/sign_in"
+            android:textColor="@color/mainTextView"/>
 
-    <EditText
-        android:id="@+id/field_password"
-        android:layout_width="0dp"
+        <ImageButton
+            android:id="@+id/google_sign_in_button"
+            style="@style/sign_in_button_style"
+            android:background="@color/mainButton"
+            android:src="@mipmap/google" />
+
+
+        <ImageButton
+            android:id="@+id/firebase_sign_in_button"
+            style="@style/sign_in_button_style"
+            android:background="@color/mainButton"
+            android:src="@mipmap/firebase" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:orientation="vertical">
 
-        android:inputType="textPassword" />
+        <TextView
+            style="@style/main_textview"
+            android:text="@string/sign_up"
+            android:textColor="@color/mainTextView"/>
 
-    <Button
-        android:id="@+id/email_sign_in_button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Go"
-         />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EAA511"
+            android:text="@string/register"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
 
 </LinearLayout>
