@@ -2,8 +2,13 @@
     <string name="app_name">SignInSignUpApp</string>
 
         <!-- Main Activity -->
-    <string name="sign_in">Choose a Sign In Method</string>
-    <string name="sign_up">Sign up for an Account!</string>
+    <string name="sign_in_prompt">Choose a Sign In Method</string>
+    <string name="sign_up_prompt">Sign up for an Account</string>
     <string name="register">Register</string>
 
+    <!-- Custom Sign in Dialog -->
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="cancel">Cancel</string>
 </resources>

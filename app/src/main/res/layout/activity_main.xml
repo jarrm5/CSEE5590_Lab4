@@ -14,7 +14,7 @@
 
         <TextView
             style="@style/main_textview"
-            android:text="@string/sign_in"
+            android:text="@string/sign_in_prompt"
             android:textColor="@color/mainTextView"/>
 
         <ImageButton
@@ -38,13 +38,14 @@
 
         <TextView
             style="@style/main_textview"
-            android:text="@string/sign_up"
+            android:text="@string/sign_up_prompt"
             android:textColor="@color/mainTextView"/>
 
         <Button
+            android:id="@+id/email_register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EAA511"
+            android:background="@color/firebase"
             android:text="@string/register"
             android:textColor="#FFFFFF"
             android:textSize="25sp"

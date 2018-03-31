@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="mainButton">#FFFFFF</color>
     <color name="mainTextView">#383333</color>
+    <color name="firebase">#EAA511</color>
 </resources>

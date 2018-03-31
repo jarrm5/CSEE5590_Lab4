@@ -2,38 +2,42 @@ package com.jarrm5.signinsignupapp;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SignInDialogFragment.SignInDialogListener {
 
-    GoogleSignInOptions googleSignInOptions;
-    GoogleSignInClient googleSignInClient;
-    SignInButton googleSignIn;
+    /* Controls */
+    private ImageButton googleSignIn;
+    private ImageButton firebaseSignIn;
 
-    private FirebaseAuth mAuth;
+    /* Google Auth objects */
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
 
-    private EditText mEmailField;
-    private EditText mPasswordField;
+    /* Firebase Auth objects */
+    private FirebaseAuth firebaseAuth;
 
+    /* Custom Sing-in Dialog */
+    SignInDialogFragment signInDialogFragment;
+
+    /* static members for this activity */
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "EmailPassword";
 
@@ -42,13 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mEmailField = findViewById(R.id.field_email);
-        mPasswordField = findViewById(R.id.field_password);
-
         googleSignIn = findViewById(R.id.google_sign_in_button);
         googleSignIn.setOnClickListener(this);
 
-        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
+        firebaseSignIn = findViewById(R.id.firebase_sign_in_button);
+        firebaseSignIn.setOnClickListener(this);
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -59,7 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Build a GoogleSignInClient with the options specified by googleSignInOptions.
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public void showSignInDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new SignInDialogFragment();
+        dialog.show(getSupportFragmentManager(), "SignInDialogFragment");
     }
 
     @Override
@@ -68,12 +76,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.google_sign_in_button:
                 doGoogleSignIn();
                 break;
-            case R.id.email_sign_in_button:
-                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            case R.id.firebase_sign_in_button:
+                showSignInDialog();
+                //signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             default:
                 break;
         }
+    }
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogSignIn(DialogFragment dialog){
+
+    }
+
+    @Override
+    public void onDialogCancel(DialogFragment dialog){
+
     }
 
     private void signIn(String email, String password) {
@@ -85,14 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showProgressDialog();*/
 
         // [START sign_in_with_email]
-        mAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
                             //updateUI(user);
                             String email = user.getEmail();
                             String name = user.getDisplayName();
