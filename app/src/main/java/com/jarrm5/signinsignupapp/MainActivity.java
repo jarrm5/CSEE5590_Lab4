@@ -3,7 +3,7 @@ package com.jarrm5.signinsignupapp;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SignInDialogFragment.SignInDialogListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener, SignInDialogFragment.SignInDialogListener {
 
     /* Controls */
     private ImageButton googleSignIn;
@@ -34,12 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /* Firebase Auth objects */
     private FirebaseAuth firebaseAuth;
 
-    /* Custom Sing-in Dialog */
-    SignInDialogFragment signInDialogFragment;
-
     /* static members for this activity */
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "EmailPassword";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // The dialog fragment receives a reference to this Activity through the
     // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    // defined by the DialogFragment.DialogListener interface
     @Override
     public void onDialogSignIn(DialogFragment dialog){
+        SignInDialogFragment signInDialogFragment = (SignInDialogFragment) dialog;
+        String username = signInDialogFragment.username.getText().toString();
+        String password = signInDialogFragment.password.getText().toString();
 
-    }
-
-    @Override
-    public void onDialogCancel(DialogFragment dialog){
-
+        Log.d("Fuck", "signIn:");
     }
 
     private void signIn(String email, String password) {
