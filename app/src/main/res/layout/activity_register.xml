@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:src="@mipmap/firebase"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/app_name" />
+
+    <EditText
+        android:id="@+id/register_email"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"/>
+
+    <EditText
+        android:id="@+id/register_password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"/>
+
+    <EditText
+        android:id="@+id/register_password_again"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/retype_password"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/HorizontalLinearLayout"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            style="@style/buttonRowStyle"
+            android:id="@+id/cancel_button"
+            android:background="@color/firebase"
+            android:text="@string/cancel"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            />
+
+        <Button
+            style="@style/buttonRowStyle"
+            android:id="@+id/register_account"
+            android:background="@color/firebase"
+            android:text="@string/register"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
