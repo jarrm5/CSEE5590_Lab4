@@ -31,12 +31,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private GoogleSignInOptions googleSignInOptions;
     private GoogleSignInClient googleSignInClient;
 
-    /* Firebase Auth objects */
-    private FirebaseAuth firebaseAuth;
-
     /* static members for this activity */
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "EmailPassword";
+
+    /* Firebase Auth objects */
+    private FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -76,7 +76,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.firebase_sign_in_button:
                 showSignInDialog();
-                //signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             default:
                 break;
@@ -88,22 +87,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     // defined by the DialogFragment.DialogListener interface
     @Override
     public void onDialogSignIn(DialogFragment dialog){
-        SignInDialogFragment signInDialogFragment = (SignInDialogFragment) dialog;
-        String username = signInDialogFragment.username.getText().toString();
-        String password = signInDialogFragment.password.getText().toString();
+        final SignInDialogFragment signInDialogFragment = (SignInDialogFragment) dialog;
+        //signIn(signInDialogFragment);
+        Log.d(TAG, "signIn:");
 
-        Log.d("Fuck", "signIn:");
-    }
+        String email = "jarrm5@com.jarrm5.signinsignupapp.com";
+        String password = "password";
+        //String email = signInDialogFragment.username.getText().toString();
+        //String password = signInDialogFragment.password.getText().toString();
 
-    private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
-        /*if (!validateForm()) {
-            return;
-        }
-
-        showProgressDialog();*/
-
-        // [START sign_in_with_email]
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -112,27 +104,22 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            //updateUI(user);
                             String email = user.getEmail();
                             String name = user.getDisplayName();
+                            signInDialogFragment.getDialog().cancel();
+                            Toast.makeText(MainActivity.this, "success.",
+                                           Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
-
-                        // [START_EXCLUDE]
-                        /*if (!task.isSuccessful()) {
-                            mStatusTextView.setText(R.string.auth_failed);
-                        }
-                        hideProgressDialog();*/
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END sign_in_with_email]
     }
+
+
 
 
     private void doGoogleSignIn(){
@@ -167,7 +154,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             //updateUI(null);
         }
     }
-
 
 
 }

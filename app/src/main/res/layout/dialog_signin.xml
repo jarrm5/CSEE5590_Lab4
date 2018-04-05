@@ -31,4 +31,12 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
         android:hint="@string/password"/>
+    <TextView
+        android:id="@+id/signin_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/errorTextColor"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
 </LinearLayout>
