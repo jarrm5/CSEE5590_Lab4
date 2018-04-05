@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     /* Controls */
     private ImageButton googleSignIn;
     private ImageButton firebaseSignIn;
+    private Button emailRegisterbutton;
 
     /* Google Auth objects */
     private GoogleSignInOptions googleSignInOptions;
@@ -49,6 +51,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         firebaseSignIn = findViewById(R.id.firebase_sign_in_button);
         firebaseSignIn.setOnClickListener(this);
+
+        emailRegisterbutton = findViewById(R.id.email_register_button);
+        emailRegisterbutton.setOnClickListener(this);
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -76,6 +81,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.firebase_sign_in_button:
                 showSignInDialog();
+                break;
+            case R.id.email_register_button:
+                startActivity(new Intent(MainActivity.this,RegisterActivity.class));
                 break;
             default:
                 break;
@@ -154,6 +162,4 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             //updateUI(null);
         }
     }
-
-
 }
