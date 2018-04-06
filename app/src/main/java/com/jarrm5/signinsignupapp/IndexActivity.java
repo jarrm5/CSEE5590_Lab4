@@ -1,5 +1,6 @@
 package com.jarrm5.signinsignupapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -86,8 +87,9 @@ public class IndexActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_signout:
-                Toast.makeText(IndexActivity.this, "Sign Out",
-                        Toast.LENGTH_SHORT).show();
+                googleSignOut();
+                firebaseSignOut();
+                startActivity(new Intent(IndexActivity.this,MainActivity.class));
                 break;
             default:
                 break;
@@ -105,11 +107,12 @@ public class IndexActivity extends AppCompatActivity {
 
     private void googleSignOut() {
         if(account != null){
+            final String displayName = account.getDisplayName();
             googleSignInClient.signOut()
                     .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(IndexActivity.this, "Succesfully Signed out",
+                            Toast.makeText(IndexActivity.this, "Succesfully Signed out " + displayName,
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -119,6 +122,8 @@ public class IndexActivity extends AppCompatActivity {
     }
     private void firebaseSignOut(){
         if(firebaseAuth.getCurrentUser() != null){
+            Toast.makeText(IndexActivity.this, "Succesfully Signed out " + firebaseAuth.getCurrentUser().getDisplayName(),
+                    Toast.LENGTH_SHORT).show();
             firebaseAuth.signOut();
         }
     }
