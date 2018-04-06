@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ImageButton googleSignIn;
     private ImageButton firebaseSignIn;
     private Button emailRegisterbutton;
+    private Button forgotPasswordButton;
 
     /* Google Auth objects */
     private GoogleSignInOptions googleSignInOptions;
@@ -57,6 +58,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         emailRegisterbutton = findViewById(R.id.email_register_button);
         emailRegisterbutton.setOnClickListener(this);
 
+        forgotPasswordButton = findViewById(R.id.email_forgot_password_button);
+        forgotPasswordButton.setOnClickListener(this);
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -75,6 +79,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         dialog.show(getSupportFragmentManager(), "SignInDialogFragment");
     }
 
+    public void showPasswordDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new PasswordDialogFragment();
+        dialog.show(getSupportFragmentManager(), "PasswordDialogFragment");
+    }
+
     @Override
     public void onClick(View v){
         switch (v.getId()) {
@@ -86,6 +96,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.email_register_button:
                 startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+                break;
+            case R.id.email_forgot_password_button:
+                showPasswordDialog();
                 break;
             default:
                 break;
