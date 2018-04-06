@@ -17,4 +17,10 @@
 
     <!-- Register layout -->
     <string name="retype_password">Retype password</string>
+
+    <!-- Menu items -->
+    <string name="menu_settings">Settings</string>
+    <string name="menu_signout">Signout</string>
+    <string name="menu_help">Help</string>
+
 </resources>

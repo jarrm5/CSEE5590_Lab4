@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         Toast.LENGTH_SHORT).show();
                             } else {
                                 ClearAllFields();
-                                //Fire the main page intent with the user signed in.
+                                startActivity(new Intent(RegisterActivity.this,IndexActivity.class));
                             }
                         }
                     });

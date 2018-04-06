@@ -99,10 +99,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //signIn(signInDialogFragment);
         Log.d(TAG, "signIn:");
 
-        String email = "jarrm5@com.jarrm5.signinsignupapp.com";
-        String password = "password";
-        //String email = signInDialogFragment.username.getText().toString();
-        //String password = signInDialogFragment.password.getText().toString();
+        //String email = "jarrm5@com.jarrm5.signinsignupapp.com";
+        //String password = "password1";
+        String email = signInDialogFragment.username.getText().toString();
+        String password = signInDialogFragment.password.getText().toString();
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -117,6 +117,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             signInDialogFragment.getDialog().cancel();
                             Toast.makeText(MainActivity.this, "success.",
                                            Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this,IndexActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -149,12 +150,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        //Google sing in was succesful
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String email = account.getEmail();
             String token = account.getIdToken();
-            // Signed in successfully, show authenticated UI.
-            //updateUI(account);
+            startActivity(new Intent(MainActivity.this,IndexActivity.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
