@@ -16,13 +16,12 @@
         <ImageView
             android:id="@+id/account_logo"
             android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@mipmap/firebase"
-
-            />
+            android:layout_height="40dp" />
 
         <TextView
             android:id="@+id/account_name"
+            android:textColor="@color/mainTextView"
+            android:layout_marginLeft="7dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

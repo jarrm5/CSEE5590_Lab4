@@ -13,10 +13,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 public class IndexActivity extends AppCompatActivity {
 
@@ -24,7 +24,6 @@ public class IndexActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     private GoogleSignInOptions googleSignInOptions;
     private GoogleSignInAccount account;
-    private ImageManager imageManager;
 
     private Toolbar toolbar;
     private ImageView accountLogo;
@@ -43,8 +42,6 @@ public class IndexActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.index_toolbar);
         setSupportActionBar(toolbar);
 
-        imageManager = ImageManager.create(this);
-
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -53,7 +50,8 @@ public class IndexActivity extends AppCompatActivity {
 
         account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null){
-            imageManager.loadImage(accountLogo,account.getPhotoUrl());
+            //Picasso can take a raw URI string and set it to an Imageview
+            Picasso.with(this).load(account.getPhotoUrl()).into(accountLogo);
             accountName.setText(account.getDisplayName());
         }
 
